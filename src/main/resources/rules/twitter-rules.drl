@@ -1,0 +1,25 @@
+package org.jboss.mpbravo.cep.example;
+
+import twitter4j.Status;
+
+rule "Dump tweets from Spain"
+dialect "mvel"
+when
+	$s : Status( Status.place.countryCode == "US" ) from entry-point "TwitterStream"
+then
+	System.out.println( "[" + $s.getCreatedAt() + "] " +
+	$s.getUser().getScreenName() + " - " +
+	$s.getText() + " - " +
+	$s.getPlace().getCountry() );
+end
+
+
+rule "Dump tweets from people laughing"
+dialect "mvel"
+when
+	$s : Status( text matches ".*lol.*" ) from entry-point "TwitterStream"
+then
+	System.out.println( "[" + $s.getCreatedAt() + "] " +
+	$s.getUser().getScreenName() + " - " +
+	$s.getText() );
+end
