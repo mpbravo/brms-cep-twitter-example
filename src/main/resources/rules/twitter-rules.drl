@@ -2,7 +2,7 @@ package org.jboss.mpbravo.cep.example;
 
 import twitter4j.Status;
 
-rule "Dump tweets from Spain"
+rule "Dump tweets from United States"
 dialect "mvel"
 when
 	$s : Status( Status.place.countryCode == "US" ) from entry-point "TwitterStream"
